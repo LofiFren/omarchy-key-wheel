@@ -209,9 +209,21 @@ function ringOf(mods) {
 
 function onWheel(b) { return ringOf(b.mods) > 0 }
 
+// Media and hardware keys arrive as XF86 names, upper-cased.
+var XF86 = {
+  AUDIORAISEVOLUME: "Volume +", AUDIOLOWERVOLUME: "Volume −", AUDIOMUTE: "Mute",
+  AUDIOMICMUTE: "Mic mute", AUDIOPLAY: "Play", AUDIOPAUSE: "Pause", AUDIONEXT: "Next track",
+  AUDIOPREV: "Previous track", AUDIOSTOP: "Stop", MONBRIGHTNESSUP: "Brightness +",
+  MONBRIGHTNESSDOWN: "Brightness −", KBDBRIGHTNESSUP: "Key light +",
+  KBDBRIGHTNESSDOWN: "Key light −", POWEROFF: "Power", CALCULATOR: "Calculator"
+}
+
 function capFor(key) {
   if (CAPS.hasOwnProperty(key)) return CAPS[key]
-  if (/^XF86/.test(key)) return key.slice(4)
+  if (/^XF86/.test(key)) {
+    var x = key.slice(4)
+    return XF86.hasOwnProperty(x) ? XF86[x] : x.charAt(0) + x.slice(1).toLowerCase()
+  }
   if (key.length === 1) return key
   return key.charAt(0) + key.slice(1).toLowerCase()
 }

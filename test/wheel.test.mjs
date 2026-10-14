@@ -95,6 +95,8 @@ test('Beyond Super holds the non-Super bindings and the compose table', () => {
   const rows = model.beyond;
   assert.ok(rows.some((r) => r.kind === 'bind' && r.combo === 'Alt + Tab'));
   assert.ok(rows.some((r) => r.kind === 'bind' && r.combo === 'Print'));
+  assert.ok(rows.some((r) => r.combo === 'Power'), 'XF86PowerOff reads as Power');
+  assert.ok(!rows.some((r) => /^[A-Z]{6,}$/.test(r.combo)), 'no raw upper-case key names');
   assert.ok(rows.some((r) => r.kind === 'compose' && r.combo === 'Caps m s' && r.out === '😄'));
   assert.ok(rows.some((r) => r.kind === 'compose' && r.combo === 'Caps Space Space'));
 });
