@@ -1,0 +1,27 @@
+#!/bin/bash
+# Stand-in for Omarchy's picker, used only when Key Wheel runs a binding.
+#
+# KeyWheel.qml writes the chosen line to a private one-shot file (mode 0600
+# in $XDG_RUNTIME_DIR), puts this directory first on PATH, and runs
+# `omarchy menu keybindings`, which asks this script what was picked. We
+# answer once and delete the file.
+#
+# Anything launched by that binding inherits the same PATH, so every later
+# call (no file any more) is handed straight to Omarchy's real picker.
+self_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+pick="${KEY_WHEEL_PICK:-}"
+
+if [[ -n $pick && -f $pick && -O $pick ]]; then
+  cat >/dev/null
+  cat -- "$pick"
+  rm -f -- "$pick"
+  exit 0
+fi
+
+IFS=: read -ra dirs <<<"$PATH"
+for d in "${dirs[@]}"; do
+  [[ -n $d && $d -ef $self_dir ]] && continue
+  [[ -x $d/omarchy-menu-select ]] && exec "$d/omarchy-menu-select" "$@"
+done
+echo "omarchy-menu-select: not found" >&2
+exit 1
