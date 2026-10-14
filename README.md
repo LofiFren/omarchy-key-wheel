@@ -121,14 +121,8 @@ here is all of it:
 
 ## Developing
 
-Clone the repo straight into the plugin folder and edit it there:
-
-```bash
-git clone https://github.com/LofiFren/omarchy-key-wheel.git ~/.config/omarchy/plugins/lofifren.key-wheel
-omarchy plugin enable lofifren.key-wheel
-bash ~/.config/omarchy/plugins/lofifren.key-wheel/bind.sh
-```
-
+Install it as above. `omarchy plugin add` leaves a git checkout in
+`~/.config/omarchy/plugins/lofifren.key-wheel`, so you can edit it in place.
 After changing `KeyWheel.qml`, run `omarchy restart shell`: a plugin rescan
 doesn't reliably reload a changed overlay. Check the manifest the way the
 shell does with `omarchy plugin validate ~/.config/omarchy/plugins/lofifren.key-wheel`.
