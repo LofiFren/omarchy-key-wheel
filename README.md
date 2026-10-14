@@ -118,27 +118,20 @@ here is all of it:
 
 `bind.sh` runs only when you run it: it adds the shortcut line to
 `~/.config/hypr/bindings.lua` (replacing one it added before).
-`dev-install.sh` and `dev-logs.sh` are for testing from a shared folder and
-are never run by the plugin; `dev-logs.sh` copies shell log lines that
-mention errors into the shared folder when you run it.
 
-## Developing from a shared folder
+## Developing
 
-For fast iteration from a Mac, clone the repo into the folder you share with
-Try Omarchy (one named `OM_Shared` shows up inside Omarchy as `~/OM_Shared`)
-and install a copy from there:
+Clone the repo straight into the plugin folder and edit it there:
 
 ```bash
-bash ~/OM_Shared/omarchy-key-wheel/dev-install.sh
+git clone https://github.com/LofiFren/omarchy-key-wheel.git ~/.config/omarchy/plugins/lofifren.key-wheel
+omarchy plugin enable lofifren.key-wheel
+bash ~/.config/omarchy/plugins/lofifren.key-wheel/bind.sh
 ```
 
-It copies rather than links, because Omarchy refuses symlinks in a plugin
-folder, then restarts the shell: a rescan alone doesn't reliably reload a
-changed overlay. Run it again after each change. If something breaks,
-`dev-logs.sh` gathers the shell's log lines into the shared folder.
-
-Check the manifest the way the shell does with
-`omarchy plugin validate ~/.config/omarchy/plugins/lofifren.key-wheel`.
+After changing `KeyWheel.qml`, run `omarchy restart shell`: a plugin rescan
+doesn't reliably reload a changed overlay. Check the manifest the way the
+shell does with `omarchy plugin validate ~/.config/omarchy/plugins/lofifren.key-wheel`.
 
 ### Test checklist
 

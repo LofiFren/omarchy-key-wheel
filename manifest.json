@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "lofifren.key-wheel",
   "name": "Key Wheel",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Lofi Fren",
   "license": "MIT",
   "description": "Every keybinding as a wheel: keys are spokes, modifiers are rings, Alt flips it. Faces for every key, search by name, and a list for everything beyond Super.",
