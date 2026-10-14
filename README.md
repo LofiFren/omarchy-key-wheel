@@ -1,5 +1,7 @@
 # Key Wheel for Omarchy
 
+![Key Wheel: the Core face with ring 2 (Super + Shift) lit](preview.png)
+
 Every keybinding you have, as a wheel. A key is a spoke, a modifier is a
 ring: **Super** alone is the outer ring, and each extra modifier steps one
 ring toward the hub.
