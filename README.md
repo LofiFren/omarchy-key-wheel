@@ -89,6 +89,10 @@ before applying them. **Remove:** `omarchy plugin remove lofifren.key-wheel`,
 then delete the lines mentioning `lofifren.key-wheel` from
 `~/.config/hypr/bindings.lua`.
 
+**Requires** Omarchy 4 (Quattro). No other dependencies: it uses only what
+Omarchy ships (`omarchy`, `omarchy-shell`, `hyprctl`, and Omarchy's
+emoji-insert helper).
+
 > **Status: 0.2, early.** Tested on Omarchy 4.0.4 in Try Omarchy on a Mac.
 
 ### What it touches
@@ -116,23 +120,20 @@ here is all of it:
 are never run by the plugin; `dev-logs.sh` copies shell log lines that
 mention errors into the shared folder when you run it.
 
-## Testing while the repo is private
+## Developing from a shared folder
 
-`omarchy plugin add` needs git to reach the repo, so inside Omarchy either:
+For fast iteration from a Mac, clone the repo into the folder you share with
+Try Omarchy (one named `OM_Shared` shows up inside Omarchy as `~/OM_Shared`)
+and install a copy from there:
 
-- sign in first with `gh auth login` and `gh auth setup-git`, then run the
-  install command above; or
-- for fast iteration from a Mac, clone the repo into the folder shared with
-  Try Omarchy (here `/Volumes/TAN_1TB/OM_Shared`, which shows up inside
-  Omarchy as `~/OM_Shared`) and install a copy from there:
+```bash
+bash ~/OM_Shared/omarchy-key-wheel/dev-install.sh
+```
 
-  ```bash
-  bash ~/OM_Shared/omarchy-key-wheel/dev-install.sh
-  ```
-
-  It copies rather than links, because Omarchy refuses symlinks in a plugin
-  folder, then restarts the shell: a rescan alone doesn't reliably reload a
-  changed overlay. Run it again after each change.
+It copies rather than links, because Omarchy refuses symlinks in a plugin
+folder, then restarts the shell: a rescan alone doesn't reliably reload a
+changed overlay. Run it again after each change. If something breaks,
+`dev-logs.sh` gathers the shell's log lines into the shared folder.
 
 Check the manifest the way the shell does with
 `omarchy plugin validate ~/.config/omarchy/plugins/lofifren.key-wheel`.
